@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Simulog</name>
+    </assembly>
+    <members>
+        <member name="T:Simulog.Effect">
+            <summary>
+            Base class for effects of IEvent predicates
+            </summary>
+        </member>
+        <member name="T:Simulog.Variables">
+            <summary>Commonly used TED.Vars for types used in this simulator.</summary>
+            <remarks>Variables will be lowercase for style/identification purposes.</remarks>
+        </member>
+        <member name="F:Simulog.Variables.state">
+            <summary> Boolean TED variable to represent the state of... </summary>
+        </member>
+        <member name="F:Simulog.Variables.exists">
+            <summary> Boolean TED variable to represent when something exists </summary>
+        </member>
+        <member name="F:Simulog.Variables.count">
+            <summary> Integer TED variable to represent the count of something </summary>
+        </member>
+        <member name="F:Simulog.Variables.time">
+            <summary> TimePoint TED variable to represent the current time </summary>
+        </member>
+        <member name="F:Simulog.Variables.start">
+            <summary> TimePoint TED variable to represent a start time </summary>
+        </member>
+        <member name="F:Simulog.Variables.end">
+            <summary> TimePoint TED variable to represent an end time </summary>
+        </member>
+        <member name="T:Utilities.ChronicleIndexing">
+            <summary> Helper methods for properly handling joint keys and indices. </summary>
+        </member>
+        <member name="M:Utilities.ChronicleIndexing.DemoteKey``1(TED.Interpreter.IColumnSpec{``0})">
+            <summary> Demotes a key to an index (while maintaining appropriate joins)</summary>
+            <param name="columnSpec">Column to be demoted</param>
+            <typeparam name="T">Type of the column</typeparam>
+            <returns>Demoted ColumnSpec</returns>
+        </member>
+        <member name="T:Utilities.StringProcessing">
+            <summary> Handles display functions like quote strings and comma separated lists </summary>
+        </member>
+        <member name="M:Utilities.StringProcessing.QuoteString(System.String)">
+            <summary> Adds quotation marks to the input string </summary>
+            <param name="toQuote">string to be quoted</param>
+            <returns>input string with quotation marks surrounding it</returns>
+        </member>
+        <member name="M:Utilities.StringProcessing.CommaSeparated``1(System.String,System.Func{System.String,``0})">
+            <summary> Take string of comma separated list and parse into component parts </summary>
+            <param name="commaList">string with comma separated list</param>
+            <param name="parseFunc">function to parse individual items in list</param>
+            <typeparam name="T">type of the parsed items</typeparam>
+            <returns>array of items of type T</returns>
+        </member>
+    </members>
+</doc>

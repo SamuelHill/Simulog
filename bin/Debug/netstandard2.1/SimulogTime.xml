@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SimulogTime</name>
+    </assembly>
+    <members>
+        <member name="T:Time.Clock">
+            <summary>
+            Internal clock, keeps time during a simulation by ticking along with Simulator.Update
+            </summary>
+        </member>
+        <member name="M:Time.Clock.Tick">
+            <summary> Increments the internal clock by 1 </summary>
+        </member>
+        <member name="M:Time.Clock.TimePoint">
+            <summary> Creates a TimePoint from the current clock tick</summary>
+            <returns> TimePoint representing the current clock tick</returns>
+        </member>
+        <member name="F:Time.Clock.CurrentTimePoint">
+            <summary> TED Function to access the current clock tick as a TimePoint</summary>
+        </member>
+        <member name="T:Time.TimePoint">
+            <summary> Record of a point in time at the finest possible temporal resolution. </summary>
+        </member>
+        <member name="F:Time.TimePoint.Clock">
+            <summary>Tick value within the simulation</summary>
+        </member>
+        <member name="M:Time.TimePoint.#ctor(System.UInt32)">
+            <param name="clock">Tick value</param>
+        </member>
+        <member name="F:Time.TimePoint.Eschaton">
+            <summary> The last possible TimePoint (in this case uint.MaxValue) </summary>
+        </member>
+        <member name="M:Time.TimePoint.CompareTo(Time.TimePoint)">
+            <inheritdoc />
+        </member>
+        <member name="M:Time.TimePoint.Equals(Time.TimePoint)">
+            <inheritdoc />
+        </member>
+        <member name="M:Time.TimePoint.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Time.TimePoint.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:Time.TimePoint.op_Equality(Time.TimePoint,Time.TimePoint)">
+            <summary> Checks if both TimePoints represent the same clock tick </summary>
+            <param name="t1">TimePoint 1</param>
+            <param name="t2">TimePoint 2</param>
+            <returns> true if both TimePoints represent the same clock tick </returns>
+        </member>
+        <member name="M:Time.TimePoint.op_Inequality(Time.TimePoint,Time.TimePoint)">
+            <summary> Checks if both TimePoints represent different clock ticks </summary>
+            <param name="t1">TimePoint 1</param>
+            <param name="t2">TimePoint 2</param>
+            <returns> true if both TimePoints represent different clock ticks </returns>
+        </member>
+        <member name="M:Time.TimePoint.ToString">
+            <returns>TimePoint as an int.</returns>
+        </member>
+        <member name="M:Time.TimePoint.FromString(System.String)">
+            <summary> For use by CsvReader. Takes a string and converts it to a TimePoint.</summary>
+        </member>
+    </members>
+</doc>
