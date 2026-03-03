@@ -1,0 +1,579 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Simulog</name>
+    </assembly>
+    <members>
+        <member name="T:Simulog.Effect">
+            <summary>
+            Base class for effects of IEvent predicates
+            </summary>
+        </member>
+        <member name="T:Simulog.Event`1">
+            <summary>
+            A 1-argument event (table predicate). When used as intended - with OccursWhen calls - this is an
+            intensional/derived table and as such will have it's contents recomputed every tick.
+            </summary>
+            <typeparam name="T1">Type of the one argument (one column)</typeparam>
+        </member>
+        <member name="M:Simulog.Event`1.#ctor(System.String,TED.Interpreter.IColumnSpec{`0})">
+            <summary>Make a new Event predicate with the specified name and default arguments</summary>
+            <param name="name">Name of the Event</param>
+            <param name="arg1">Default variable of the first argument</param>
+        </member>
+        <member name="P:Simulog.Event`1.Chronicle">
+            <summary>Access (and create if not created) the event chronicle for this event.</summary>
+        </member>
+        <member name="M:Simulog.Event`1.OccursWhen(TED.Interpreter.Goal[])">
+            <summary>Establishes the logic for when an event occurs.</summary>
+            <param name="conditions">Conditions under which the event should occur. When they conditions evaluate
+            to True the values stored in the default variable will be added to the table this tick.</param>
+            <returns>The same Event for method chaining.</returns>
+        </member>
+        <member name="M:Simulog.Event`1.Causes(Simulog.Effect[])">
+            <summary>Establishes the logic for side effects of when an event occurs.</summary>
+            <param name="effects">List of Effects that this event occuring will cause.</param>
+            <returns>The same Event for method chaining.</returns>
+        </member>
+        <member name="P:Simulog.Event`1.Item(TED.Term{`0})">
+            <summary>Make a goal from this predicate with the specified argument value.</summary>
+            <param name="arg1">Value to check for in the table.</param>
+        </member>
+        <member name="T:Simulog.Event`1.EventGoal">
+            <summary>Modified table goal for events - representing the application of arguments to an event.</summary>
+        </member>
+        <member name="M:Simulog.Event`1.EventGoal.#ctor(Simulog.Event{`0},TED.Term{`0})">
+            <summary>Create EventGoal for the given event and argument.</summary>
+            <param name="e">Event to apply argument to.</param>
+            <param name="arg1">Argument to apply to event.</param>
+        </member>
+        <member name="M:Simulog.Event`1.EventGoal.At(TED.Term{Time.TimePoint})">
+            <summary>Access this events chronicle to find occurrences of the event at the specified time.</summary>
+            <param name="time">TimePoint to find occurrences of this event at.</param>
+            <returns>Goal of finding the occurrences of EventGoal at the time passed in.</returns>
+        </member>
+        <member name="T:Simulog.Event`2">
+            <summary>
+            A 2-argument event (table predicate). When used as intended - with OccursWhen calls - this is an
+            intensional/derived table and as such will have it's contents recomputed every tick.
+            </summary>
+            <typeparam name="T1">Type of the first argument (column one)</typeparam>
+            <typeparam name="T2">Type of the second argument (column two)</typeparam>
+        </member>
+        <member name="M:Simulog.Event`2.#ctor(System.String,TED.Interpreter.IColumnSpec{`0},TED.Interpreter.IColumnSpec{`1})">
+            <summary><inheritdoc cref="M:Simulog.Event`1.#ctor(System.String,TED.Interpreter.IColumnSpec{`0})"/></summary>
+            <param name="name">Name of the Event</param>
+            <param name="arg1">Default variable of the first argument</param>
+            <param name="arg2">Default variable of the second argument</param>
+        </member>
+        <member name="P:Simulog.Event`2.Chronicle">
+            <inheritdoc cref="P:Simulog.Event`1.Chronicle"/>
+        </member>
+        <member name="M:Simulog.Event`2.OccursWhen(TED.Interpreter.Goal[])">
+            <inheritdoc cref="M:Simulog.Event`1.OccursWhen(TED.Interpreter.Goal[])"/>
+        </member>
+        <member name="M:Simulog.Event`2.Causes(Simulog.Effect[])">
+            <inheritdoc cref="M:Simulog.Event`1.Causes(Simulog.Effect[])"/>
+        </member>
+        <member name="P:Simulog.Event`2.Item(TED.Term{`0},TED.Term{`1})">
+            <summary>Make a goal from this predicate with the specified argument values.</summary>
+            <param name="arg1">Value to check for in column one of the table.</param>
+            <param name="arg2">Value to check for in column two of the table.</param>
+        </member>
+        <member name="T:Simulog.Event`2.EventGoal">
+            <inheritdoc cref="T:Simulog.Event`1.EventGoal"/>
+        </member>
+        <member name="M:Simulog.Event`2.EventGoal.#ctor(Simulog.Event{`0,`1},TED.Term{`0},TED.Term{`1})">
+            <summary>Create EventGoal for the given event and arguments.</summary>
+            <param name="e">Event to apply arguments to.</param>
+            <param name="arg1">Argument to apply to event (column one).</param>
+            <param name="arg2">Argument to apply to event (column two).</param>
+        </member>
+        <member name="M:Simulog.Event`2.EventGoal.At(TED.Term{Time.TimePoint})">
+            <inheritdoc cref="M:Simulog.Event`1.EventGoal.At(TED.Term{Time.TimePoint})"/>
+        </member>
+        <member name="T:Simulog.Event`3">
+            <summary>
+            A 3-argument event (table predicate). When used as intended - with OccursWhen calls - this is an
+            intensional/derived table and as such will have it's contents recomputed every tick.
+            </summary>
+            <typeparam name="T1">Type of the first argument (column one)</typeparam>
+            <typeparam name="T2">Type of the second argument (column two)</typeparam>
+            <typeparam name="T3">Type of the third argument (column three)</typeparam>
+        </member>
+        <member name="M:Simulog.Event`3.#ctor(System.String,TED.Interpreter.IColumnSpec{`0},TED.Interpreter.IColumnSpec{`1},TED.Interpreter.IColumnSpec{`2})">
+            <summary><inheritdoc cref="M:Simulog.Event`1.#ctor(System.String,TED.Interpreter.IColumnSpec{`0})"/></summary>
+            <param name="name">Name of the Event</param>
+            <param name="arg1">Default variable of the first argument</param>
+            <param name="arg2">Default variable of the second argument</param>
+            <param name="arg3">Default variable of the third argument</param>
+        </member>
+        <member name="P:Simulog.Event`3.Chronicle">
+            <inheritdoc cref="P:Simulog.Event`1.Chronicle"/>
+        </member>
+        <member name="M:Simulog.Event`3.OccursWhen(TED.Interpreter.Goal[])">
+            <inheritdoc cref="M:Simulog.Event`1.OccursWhen(TED.Interpreter.Goal[])"/>
+        </member>
+        <member name="M:Simulog.Event`3.Causes(Simulog.Effect[])">
+            <inheritdoc cref="M:Simulog.Event`1.Causes(Simulog.Effect[])"/>
+        </member>
+        <member name="P:Simulog.Event`3.Item(TED.Term{`0},TED.Term{`1},TED.Term{`2})">
+            <summary>Make a goal from this predicate with the specified argument values.</summary>
+            <param name="arg1">Value to check for in column one of the table.</param>
+            <param name="arg2">Value to check for in column two of the table.</param>
+            <param name="arg3">Value to check for in column three of the table.</param>
+        </member>
+        <member name="T:Simulog.Event`3.EventGoal">
+            <inheritdoc cref="T:Simulog.Event`1.EventGoal"/>
+        </member>
+        <member name="M:Simulog.Event`3.EventGoal.#ctor(Simulog.Event{`0,`1,`2},TED.Term{`0},TED.Term{`1},TED.Term{`2})">
+            <summary><inheritdoc cref="M:Simulog.Event`2.EventGoal.#ctor(Simulog.Event{`0,`1},TED.Term{`0},TED.Term{`1})"/></summary>
+            <param name="e">Event to apply arguments to.</param>
+            <param name="arg1">Argument to apply to event (column one).</param>
+            <param name="arg2">Argument to apply to event (column two).</param>
+            <param name="arg3">Argument to apply to event (column three).</param>
+        </member>
+        <member name="M:Simulog.Event`3.EventGoal.At(TED.Term{Time.TimePoint})">
+            <inheritdoc cref="M:Simulog.Event`1.EventGoal.At(TED.Term{Time.TimePoint})"/>
+        </member>
+        <member name="T:Simulog.Event`4">
+            <summary>
+            A 4-argument event (table predicate). When used as intended - with OccursWhen calls - this is an
+            intensional/derived table and as such will have it's contents recomputed every tick.
+            </summary>
+            <typeparam name="T1">Type of the first argument (column one)</typeparam>
+            <typeparam name="T2">Type of the second argument (column two)</typeparam>
+            <typeparam name="T3">Type of the third argument (column three)</typeparam>
+            <typeparam name="T4">Type of the fourth argument (column four)</typeparam>
+        </member>
+        <member name="M:Simulog.Event`4.#ctor(System.String,TED.Interpreter.IColumnSpec{`0},TED.Interpreter.IColumnSpec{`1},TED.Interpreter.IColumnSpec{`2},TED.Interpreter.IColumnSpec{`3})">
+            <summary><inheritdoc cref="M:Simulog.Event`1.#ctor(System.String,TED.Interpreter.IColumnSpec{`0})"/></summary>
+            <param name="name">Name of the Event</param>
+            <param name="arg1">Default variable of the first argument</param>
+            <param name="arg2">Default variable of the second argument</param>
+            <param name="arg3">Default variable of the third argument</param>
+            <param name="arg4">Default variable of the fourth argument</param>
+        </member>
+        <member name="P:Simulog.Event`4.Chronicle">
+            <inheritdoc cref="P:Simulog.Event`1.Chronicle"/>
+        </member>
+        <member name="M:Simulog.Event`4.OccursWhen(TED.Interpreter.Goal[])">
+            <inheritdoc cref="M:Simulog.Event`1.OccursWhen(TED.Interpreter.Goal[])"/>
+        </member>
+        <member name="M:Simulog.Event`4.Causes(Simulog.Effect[])">
+            <inheritdoc cref="M:Simulog.Event`1.Causes(Simulog.Effect[])"/>
+        </member>
+        <member name="P:Simulog.Event`4.Item(TED.Term{`0},TED.Term{`1},TED.Term{`2},TED.Term{`3})">
+            <summary>Make a goal from this predicate with the specified argument values.</summary>
+            <param name="arg1">Value to check for in column one of the table.</param>
+            <param name="arg2">Value to check for in column two of the table.</param>
+            <param name="arg3">Value to check for in column three of the table.</param>
+            <param name="arg4">Value to check for in column four of the table.</param>
+        </member>
+        <member name="T:Simulog.Event`4.EventGoal">
+            <inheritdoc cref="T:Simulog.Event`1.EventGoal"/>
+        </member>
+        <member name="M:Simulog.Event`4.EventGoal.#ctor(Simulog.Event{`0,`1,`2,`3},TED.Term{`0},TED.Term{`1},TED.Term{`2},TED.Term{`3})">
+            <summary><inheritdoc cref="M:Simulog.Event`2.EventGoal.#ctor(Simulog.Event{`0,`1},TED.Term{`0},TED.Term{`1})"/></summary>
+            <param name="e">Event to apply arguments to.</param>
+            <param name="arg1">Argument to apply to event (column one).</param>
+            <param name="arg2">Argument to apply to event (column two).</param>
+            <param name="arg3">Argument to apply to event (column three).</param>
+            <param name="arg4">Argument to apply to event (column four).</param>
+        </member>
+        <member name="M:Simulog.Event`4.EventGoal.At(TED.Term{Time.TimePoint})">
+            <inheritdoc cref="M:Simulog.Event`1.EventGoal.At(TED.Term{Time.TimePoint})"/>
+        </member>
+        <member name="T:Simulog.Event`5">
+            <summary>
+            A 5-argument event (table predicate). When used as intended - with OccursWhen calls - this is an
+            intensional/derived table and as such will have it's contents recomputed every tick.
+            </summary>
+            <typeparam name="T1">Type of the first argument (column one)</typeparam>
+            <typeparam name="T2">Type of the second argument (column two)</typeparam>
+            <typeparam name="T3">Type of the third argument (column three)</typeparam>
+            <typeparam name="T4">Type of the fourth argument (column four)</typeparam>
+            <typeparam name="T5">Type of the fifth argument (column five)</typeparam>
+        </member>
+        <member name="M:Simulog.Event`5.#ctor(System.String,TED.Interpreter.IColumnSpec{`0},TED.Interpreter.IColumnSpec{`1},TED.Interpreter.IColumnSpec{`2},TED.Interpreter.IColumnSpec{`3},TED.Interpreter.IColumnSpec{`4})">
+            <summary><inheritdoc cref="M:Simulog.Event`1.#ctor(System.String,TED.Interpreter.IColumnSpec{`0})"/></summary>
+            <param name="name">Name of the Event</param>
+            <param name="arg1">Default variable of the first argument</param>
+            <param name="arg2">Default variable of the second argument</param>
+            <param name="arg3">Default variable of the third argument</param>
+            <param name="arg4">Default variable of the fourth argument</param>
+            <param name="arg5">Default variable of the fifth argument</param>
+        </member>
+        <member name="P:Simulog.Event`5.Chronicle">
+            <inheritdoc cref="P:Simulog.Event`1.Chronicle"/>
+        </member>
+        <member name="M:Simulog.Event`5.OccursWhen(TED.Interpreter.Goal[])">
+            <inheritdoc cref="M:Simulog.Event`1.OccursWhen(TED.Interpreter.Goal[])"/>
+        </member>
+        <member name="M:Simulog.Event`5.Causes(Simulog.Effect[])">
+            <inheritdoc cref="M:Simulog.Event`1.Causes(Simulog.Effect[])"/>
+        </member>
+        <member name="P:Simulog.Event`5.Item(TED.Term{`0},TED.Term{`1},TED.Term{`2},TED.Term{`3},TED.Term{`4})">
+            <summary>Make a goal from this predicate with the specified argument values.</summary>
+            <param name="arg1">Value to check for in column one of the table.</param>
+            <param name="arg2">Value to check for in column two of the table.</param>
+            <param name="arg3">Value to check for in column three of the table.</param>
+            <param name="arg4">Value to check for in column four of the table.</param>
+            <param name="arg5">Value to check for in column five of the table.</param>
+        </member>
+        <member name="T:Simulog.Event`5.EventGoal">
+            <inheritdoc cref="T:Simulog.Event`1.EventGoal"/>
+        </member>
+        <member name="M:Simulog.Event`5.EventGoal.#ctor(Simulog.Event{`0,`1,`2,`3,`4},TED.Term{`0},TED.Term{`1},TED.Term{`2},TED.Term{`3},TED.Term{`4})">
+            <summary><inheritdoc cref="M:Simulog.Event`2.EventGoal.#ctor(Simulog.Event{`0,`1},TED.Term{`0},TED.Term{`1})"/></summary>
+            <param name="e">Event to apply arguments to.</param>
+            <param name="arg1">Argument to apply to event (column one).</param>
+            <param name="arg2">Argument to apply to event (column two).</param>
+            <param name="arg3">Argument to apply to event (column three).</param>
+            <param name="arg4">Argument to apply to event (column four).</param>
+            <param name="arg5">Argument to apply to event (column five).</param>
+        </member>
+        <member name="M:Simulog.Event`5.EventGoal.At(TED.Term{Time.TimePoint})">
+            <inheritdoc cref="M:Simulog.Event`1.EventGoal.At(TED.Term{Time.TimePoint})"/>
+        </member>
+        <member name="T:Simulog.Event`6">
+            <summary>
+            A 6-argument event (table predicate). When used as intended - with OccursWhen calls - this is an
+            intensional/derived table and as such will have it's contents recomputed every tick.
+            </summary>
+            <typeparam name="T1">Type of the first argument (column one)</typeparam>
+            <typeparam name="T2">Type of the second argument (column two)</typeparam>
+            <typeparam name="T3">Type of the third argument (column three)</typeparam>
+            <typeparam name="T4">Type of the fourth argument (column four)</typeparam>
+            <typeparam name="T5">Type of the fifth argument (column five)</typeparam>
+            <typeparam name="T6">Type of the sixth argument (column six)</typeparam>
+        </member>
+        <member name="M:Simulog.Event`6.#ctor(System.String,TED.Interpreter.IColumnSpec{`0},TED.Interpreter.IColumnSpec{`1},TED.Interpreter.IColumnSpec{`2},TED.Interpreter.IColumnSpec{`3},TED.Interpreter.IColumnSpec{`4},TED.Interpreter.IColumnSpec{`5})">
+            <summary><inheritdoc cref="M:Simulog.Event`1.#ctor(System.String,TED.Interpreter.IColumnSpec{`0})"/></summary>
+            <param name="name">Name of the Event</param>
+            <param name="arg1">Default variable of the first argument</param>
+            <param name="arg2">Default variable of the second argument</param>
+            <param name="arg3">Default variable of the third argument</param>
+            <param name="arg4">Default variable of the fourth argument</param>
+            <param name="arg5">Default variable of the fifth argument</param>
+            <param name="arg6">Default variable of the sixth argument</param>
+        </member>
+        <member name="P:Simulog.Event`6.Chronicle">
+            <inheritdoc cref="P:Simulog.Event`1.Chronicle"/>
+        </member>
+        <member name="M:Simulog.Event`6.OccursWhen(TED.Interpreter.Goal[])">
+            <inheritdoc cref="M:Simulog.Event`1.OccursWhen(TED.Interpreter.Goal[])"/>
+        </member>
+        <member name="M:Simulog.Event`6.Causes(Simulog.Effect[])">
+            <inheritdoc cref="M:Simulog.Event`1.Causes(Simulog.Effect[])"/>
+        </member>
+        <member name="P:Simulog.Event`6.Item(TED.Term{`0},TED.Term{`1},TED.Term{`2},TED.Term{`3},TED.Term{`4},TED.Term{`5})">
+            <summary>Make a goal from this predicate with the specified argument values.</summary>
+            <param name="arg1">Value to check for in column one of the table.</param>
+            <param name="arg2">Value to check for in column two of the table.</param>
+            <param name="arg3">Value to check for in column three of the table.</param>
+            <param name="arg4">Value to check for in column four of the table.</param>
+            <param name="arg5">Value to check for in column five of the table.</param>
+            <param name="arg6">Value to check for in column six of the table.</param>
+        </member>
+        <member name="T:Simulog.Event`6.EventGoal">
+            <inheritdoc cref="T:Simulog.Event`1.EventGoal"/>
+        </member>
+        <member name="M:Simulog.Event`6.EventGoal.#ctor(Simulog.Event{`0,`1,`2,`3,`4,`5},TED.Term{`0},TED.Term{`1},TED.Term{`2},TED.Term{`3},TED.Term{`4},TED.Term{`5})">
+            <summary><inheritdoc cref="M:Simulog.Event`2.EventGoal.#ctor(Simulog.Event{`0,`1},TED.Term{`0},TED.Term{`1})"/></summary>
+            <param name="e">Event to apply arguments to.</param>
+            <param name="arg1">Argument to apply to event (column one).</param>
+            <param name="arg2">Argument to apply to event (column two).</param>
+            <param name="arg3">Argument to apply to event (column three).</param>
+            <param name="arg4">Argument to apply to event (column four).</param>
+            <param name="arg5">Argument to apply to event (column five).</param>
+            <param name="arg6">Argument to apply to event (column six).</param>
+        </member>
+        <member name="M:Simulog.Event`6.EventGoal.At(TED.Term{Time.TimePoint})">
+            <inheritdoc cref="M:Simulog.Event`1.EventGoal.At(TED.Term{Time.TimePoint})"/>
+        </member>
+        <member name="T:Simulog.Event`7">
+            <summary>
+            A 7-argument event (table predicate). When used as intended - with OccursWhen calls - this is an
+            intensional/derived table and as such will have it's contents recomputed every tick.
+            </summary>
+            <typeparam name="T1">Type of the first argument (column one)</typeparam>
+            <typeparam name="T2">Type of the second argument (column two)</typeparam>
+            <typeparam name="T3">Type of the third argument (column three)</typeparam>
+            <typeparam name="T4">Type of the fourth argument (column four)</typeparam>
+            <typeparam name="T5">Type of the fifth argument (column five)</typeparam>
+            <typeparam name="T6">Type of the sixth argument (column six)</typeparam>
+            <typeparam name="T7">Type of the seventh argument (column seven)</typeparam>
+        </member>
+        <member name="M:Simulog.Event`7.#ctor(System.String,TED.Interpreter.IColumnSpec{`0},TED.Interpreter.IColumnSpec{`1},TED.Interpreter.IColumnSpec{`2},TED.Interpreter.IColumnSpec{`3},TED.Interpreter.IColumnSpec{`4},TED.Interpreter.IColumnSpec{`5},TED.Interpreter.IColumnSpec{`6})">
+            <summary><inheritdoc cref="M:Simulog.Event`1.#ctor(System.String,TED.Interpreter.IColumnSpec{`0})"/></summary>
+            <param name="name">Name of the Event</param>
+            <param name="arg1">Default variable of the first argument</param>
+            <param name="arg2">Default variable of the second argument</param>
+            <param name="arg3">Default variable of the third argument</param>
+            <param name="arg4">Default variable of the fourth argument</param>
+            <param name="arg5">Default variable of the fifth argument</param>
+            <param name="arg6">Default variable of the sixth argument</param>
+            <param name="arg7">Default variable of the seventh argument</param>
+        </member>
+        <member name="P:Simulog.Event`7.Chronicle">
+            <inheritdoc cref="P:Simulog.Event`1.Chronicle"/>
+        </member>
+        <member name="M:Simulog.Event`7.OccursWhen(TED.Interpreter.Goal[])">
+            <inheritdoc cref="M:Simulog.Event`1.OccursWhen(TED.Interpreter.Goal[])"/>
+        </member>
+        <member name="M:Simulog.Event`7.Causes(Simulog.Effect[])">
+            <inheritdoc cref="M:Simulog.Event`1.Causes(Simulog.Effect[])"/>
+        </member>
+        <member name="P:Simulog.Event`7.Item(TED.Term{`0},TED.Term{`1},TED.Term{`2},TED.Term{`3},TED.Term{`4},TED.Term{`5},TED.Term{`6})">
+            <summary>Make a goal from this predicate with the specified argument values.</summary>
+            <param name="arg1">Value to check for in column one of the table.</param>
+            <param name="arg2">Value to check for in column two of the table.</param>
+            <param name="arg3">Value to check for in column three of the table.</param>
+            <param name="arg4">Value to check for in column four of the table.</param>
+            <param name="arg5">Value to check for in column five of the table.</param>
+            <param name="arg6">Value to check for in column six of the table.</param>
+            <param name="arg7">Value to check for in column seven of the table.</param>
+        </member>
+        <member name="T:Simulog.Event`7.EventGoal">
+            <inheritdoc cref="T:Simulog.Event`1.EventGoal"/>
+        </member>
+        <member name="M:Simulog.Event`7.EventGoal.#ctor(Simulog.Event{`0,`1,`2,`3,`4,`5,`6},TED.Term{`0},TED.Term{`1},TED.Term{`2},TED.Term{`3},TED.Term{`4},TED.Term{`5},TED.Term{`6})">
+            <summary><inheritdoc cref="M:Simulog.Event`2.EventGoal.#ctor(Simulog.Event{`0,`1},TED.Term{`0},TED.Term{`1})"/></summary>
+            <param name="e">Event to apply arguments to.</param>
+            <param name="arg1">Argument to apply to event (column one).</param>
+            <param name="arg2">Argument to apply to event (column two).</param>
+            <param name="arg3">Argument to apply to event (column three).</param>
+            <param name="arg4">Argument to apply to event (column four).</param>
+            <param name="arg5">Argument to apply to event (column five).</param>
+            <param name="arg6">Argument to apply to event (column six).</param>
+            <param name="arg7">Argument to apply to event (column seven).</param>
+        </member>
+        <member name="M:Simulog.Event`7.EventGoal.At(TED.Term{Time.TimePoint})">
+            <inheritdoc cref="M:Simulog.Event`1.EventGoal.At(TED.Term{Time.TimePoint})"/>
+        </member>
+        <member name="T:Simulog.SimuLang">
+            <summary>
+            Simulog language definitions - macros that can be used as a DSL within C#. For easy access 
+            to all of the various predicates that Simulog offers simply use this file when importing.
+            </summary>
+        </member>
+        <member name="T:Simulog.Timer`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T1"></typeparam>
+        </member>
+        <member name="T:Simulog.Variables">
+            <summary>Commonly used TED.Vars for types used in this simulator.</summary>
+            <remarks>Variables will be lowercase for style/identification purposes.</remarks>
+        </member>
+        <member name="F:Simulog.Variables.state">
+            <summary> Boolean TED variable to represent the state of... </summary>
+        </member>
+        <member name="F:Simulog.Variables.exists">
+            <summary> Boolean TED variable to represent when something exists </summary>
+        </member>
+        <member name="F:Simulog.Variables.count">
+            <summary> Integer TED variable to represent the count of something </summary>
+        </member>
+        <member name="F:Simulog.Variables.time">
+            <summary> TimePoint TED variable to represent the current time </summary>
+        </member>
+        <member name="F:Simulog.Variables.start">
+            <summary> TimePoint TED variable to represent a start time </summary>
+        </member>
+        <member name="F:Simulog.Variables.end">
+            <summary> TimePoint TED variable to represent an end time </summary>
+        </member>
+        <member name="T:Time.Clock">
+            <summary>
+            Internal clock, keeps time during a simulation by ticking along with Simulator.Update
+            </summary>
+        </member>
+        <member name="F:Time.Clock.ClockTick">
+            <summary> Simulation clock value (measured in 'ticks') </summary>
+        </member>
+        <member name="F:Time.Clock.LastTickDuration">
+            <summary> Duration of the previous tick </summary>
+        </member>
+        <member name="F:Time.Clock.clockTicks">
+            <summary>TED variable to allow for referencing to the underlying clock datatype</summary>
+        </member>
+        <member name="M:Time.Clock.Tick">
+            <summary> Increments the internal clock by 1 </summary>
+        </member>
+        <member name="M:Time.Clock.TimePoint">
+            <summary> Creates a TimePoint from the current clock tick</summary>
+            <returns> TimePoint representing the current clock tick</returns>
+        </member>
+        <member name="F:Time.Clock.CurrentTimePoint">
+            <summary> TED Function to access the current clock tick as a TimePoint</summary>
+        </member>
+        <member name="F:Time.Clock.DecrementByLastTick">
+            <summary> Decrements the value passed in by the last ticks duration (1) </summary>
+        </member>
+        <member name="F:Time.Clock.CheckTimeWithinLastTick">
+            <summary> Checks whether or not the TimePoint has occured yet </summary>
+        </member>
+        <member name="T:Time.TimePoint">
+            <summary> Record of a point in time at the finest possible temporal resolution. </summary>
+        </member>
+        <member name="F:Time.TimePoint.Clock">
+            <summary>Clock tick value that this time point represents</summary>
+        </member>
+        <member name="M:Time.TimePoint.#ctor(System.UInt32)">
+            <param name="clock">Tick value</param>
+        </member>
+        <member name="F:Time.TimePoint.Eschaton">
+            <summary> The last possible TimePoint (in this case uint.MaxValue) </summary>
+        </member>
+        <member name="M:Time.TimePoint.CompareTo(Time.TimePoint)">
+            <inheritdoc />
+        </member>
+        <member name="M:Time.TimePoint.Equals(Time.TimePoint)">
+            <inheritdoc />
+        </member>
+        <member name="M:Time.TimePoint.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Time.TimePoint.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:Time.TimePoint.op_Equality(Time.TimePoint,Time.TimePoint)">
+            <summary> Checks if both TimePoints represent the same clock tick </summary>
+            <param name="t1">TimePoint 1</param>
+            <param name="t2">TimePoint 2</param>
+            <returns> true if both TimePoints represent the same clock tick </returns>
+        </member>
+        <member name="M:Time.TimePoint.op_Inequality(Time.TimePoint,Time.TimePoint)">
+            <summary> Checks if both TimePoints represent different clock ticks </summary>
+            <param name="t1">TimePoint 1</param>
+            <param name="t2">TimePoint 2</param>
+            <returns> true if both TimePoints represent different clock ticks </returns>
+        </member>
+        <member name="M:Time.TimePoint.op_Equality(Time.TimePoint,System.UInt32)">
+            <summary> Checks if TimePoint t1s clock tick is the same as the value t2 </summary>
+            <param name="t1">TimePoint</param>
+            <param name="t2">number of clock ticks</param>
+            <returns> true if TimePoint t1s clock tick is the same as the value t2 </returns>
+        </member>
+        <member name="M:Time.TimePoint.op_Inequality(Time.TimePoint,System.UInt32)">
+            <summary> Checks if TimePoint t1s clock tick is different from the value t2 </summary>
+            <param name="t1">TimePoint</param>
+            <param name="t2">number of clock ticks</param>
+            <returns> true if TimePoint t1s clock tick is different from the value t2 </returns>
+        </member>
+        <member name="M:Time.TimePoint.op_GreaterThan(Time.TimePoint,Time.TimePoint)">
+            <summary> Checks if TimePoint t1 is greater (comes later in time) than t2 </summary>
+            <param name="t1">TimePoint 1</param>
+            <param name="t2">TimePoint 2</param>
+            <returns> true if TimePoint t1 is greater (comes later in time) than t2 </returns>
+        </member>
+        <member name="M:Time.TimePoint.op_LessThan(Time.TimePoint,Time.TimePoint)">
+            <summary> Checks if TimePoint t1 is less (comes sooner in time) than t2 </summary>
+            <param name="t1">TimePoint 1</param>
+            <param name="t2">TimePoint 2</param>
+            <returns> true if TimePoint t1 is less (comes sooner in time) than t2 </returns>
+        </member>
+        <member name="M:Time.TimePoint.op_GreaterThan(Time.TimePoint,System.UInt32)">
+            <summary> Checks if TimePoint t1s clock tick is greater than the value t2</summary>
+            <param name="t1">TimePoint</param>
+            <param name="t2">number of clock ticks</param>
+            <returns> true if TimePoint t1s clock tick is greater than the value t2 </returns>
+        </member>
+        <member name="M:Time.TimePoint.op_LessThan(Time.TimePoint,System.UInt32)">
+            <summary> Checks if TimePoint t1s clock tick is less than the value t2 </summary>
+            <param name="t1">TimePoint</param>
+            <param name="t2">number of clock ticks</param>
+            <returns> true if TimePoint t1s clock tick is less than the value t2 </returns>
+        </member>
+        <member name="M:Time.TimePoint.op_GreaterThanOrEqual(Time.TimePoint,Time.TimePoint)">
+            <summary> Checks if TimePoint t1 is greater (comes later in time) than or equal to t2 </summary>
+            <param name="t1">TimePoint 1</param>
+            <param name="t2">TimePoint 2</param>
+            <returns> true if TimePoint t1 is greater (comes later in time) than or equal to t2 </returns>
+        </member>
+        <member name="M:Time.TimePoint.op_LessThanOrEqual(Time.TimePoint,Time.TimePoint)">
+            <summary> Checks if TimePoint t1 is less (comes sooner in time) than or equal to t2 </summary>
+            <param name="t1">TimePoint 1</param>
+            <param name="t2">TimePoint 2</param>
+            <returns> true if TimePoint t1 is less (comes sooner in time) than or equal to t2 </returns>
+        </member>
+        <member name="M:Time.TimePoint.op_GreaterThanOrEqual(Time.TimePoint,System.UInt32)">
+            <summary> Checks if TimePoint t1s clock tick is greater than or equal to the value t2</summary>
+            <param name="t1">TimePoint</param>
+            <param name="t2">number of clock ticks</param>
+            <returns> true if TimePoint t1s clock tick is greater than or equal to the value t2 </returns>
+        </member>
+        <member name="M:Time.TimePoint.op_LessThanOrEqual(Time.TimePoint,System.UInt32)">
+            <summary> Checks if TimePoint t1s clock tick is less than or equal to the value t2 </summary>
+            <param name="t1">TimePoint</param>
+            <param name="t2">number of clock ticks</param>
+            <returns> true if TimePoint t1s clock tick is less than or equal to the value t2 </returns>
+        </member>
+        <member name="M:Time.TimePoint.op_Addition(Time.TimePoint,Time.TimePoint)">
+            <summary> Add TimePoints creating a new point representing a clock tick that is the sum of each TimePoints clock ticks </summary>
+            <param name="t1">TimePoint 1</param>
+            <param name="t2">TimePoint 2</param>
+            <returns> a TimePoint representing a clock tick that is the sum of each TimePoints clock ticks </returns>
+        </member>
+        <member name="M:Time.TimePoint.op_Subtraction(Time.TimePoint,Time.TimePoint)">
+            <summary> Subtract TimePoints creating a new point representing a clock tick that is the difference of the TimePoints clock ticks </summary>
+            <param name="t1">TimePoint 1</param>
+            <param name="t2">TimePoint 2</param>
+            <returns> a TimePoint representing a clock tick that is the difference of the TimePoints clock ticks </returns>
+        </member>
+        <member name="M:Time.TimePoint.op_Addition(Time.TimePoint,System.UInt32)">
+            <summary> Add some number of clock ticks to a TimePoints clock ticks </summary>
+            <param name="t1">TimePoint</param>
+            <param name="t2">number of clock ticks</param>
+            <returns> a TimePoint representing the time t2 number of clock ticks after (assuming positive t2) t1 </returns>
+        </member>
+        <member name="M:Time.TimePoint.op_Subtraction(Time.TimePoint,System.UInt32)">
+            <summary> Subtract some number of clock ticks to a TimePoints clock ticks </summary>
+            <param name="t1">TimePoint</param>
+            <param name="t2">number of clock ticks</param>
+            <returns> a TimePoint representing the time t2 number of clock ticks before (assuming positive t2) t1 </returns>
+        </member>
+        <member name="F:Time.TimePoint.AddToTimePoint">
+            <summary> <inheritdoc cref="M:Time.TimePoint.op_Addition(Time.TimePoint,System.UInt32)" path="summary"/> </summary>
+        </member>
+        <member name="M:Time.TimePoint.AddToTimePointImplementation(Time.TimePoint,System.UInt32)">
+            <summary> <inheritdoc cref="M:Time.TimePoint.op_Addition(Time.TimePoint,System.UInt32)" path="summary"/> </summary>
+            <param name="x"><inheritdoc cref="M:Time.TimePoint.op_Addition(Time.TimePoint,System.UInt32)" path="param[@name='t1']/node()"/></param>
+            <param name="y">number of clock ticks</param>
+            <returns>a TimePoint representing the time y number of clock ticks after (assuming positive y) x</returns>
+        </member>
+        <member name="M:Time.TimePoint.ToString">
+            <returns>TimePoint as an integer string with the text "Has not occurred" for Eschaton TimePoints.</returns>
+        </member>
+        <member name="M:Time.TimePoint.FromString(System.String)">
+            <summary> For use by CsvReader. Takes a string and converts it to a TimePoint.</summary>
+        </member>
+        <member name="T:Utilities.ChronicleIndexing">
+            <summary> Helper methods for properly handling joint keys and indices. </summary>
+        </member>
+        <member name="M:Utilities.ChronicleIndexing.DemoteKey``1(TED.Interpreter.IColumnSpec{``0})">
+            <summary> Demotes a key to an index (while maintaining appropriate joins)</summary>
+            <param name="columnSpec">Column to be demoted</param>
+            <typeparam name="T">Type of the column</typeparam>
+            <returns>Demoted ColumnSpec</returns>
+        </member>
+        <member name="T:Utilities.StringProcessing">
+            <summary> Handles display functions like quote strings and comma separated lists </summary>
+        </member>
+        <member name="M:Utilities.StringProcessing.QuoteString(System.String)">
+            <summary> Adds quotation marks to the input string </summary>
+            <param name="toQuote">string to be quoted</param>
+            <returns>input string with quotation marks surrounding it</returns>
+        </member>
+        <member name="M:Utilities.StringProcessing.CommaSeparated``1(System.String,System.Func{System.String,``0})">
+            <summary> Take string of comma separated list and parse into component parts </summary>
+            <param name="commaList">string with comma separated list</param>
+            <param name="parseFunc">function to parse individual items in list</param>
+            <typeparam name="T">type of the parsed items</typeparam>
+            <returns>array of items of type T</returns>
+        </member>
+    </members>
+</doc>

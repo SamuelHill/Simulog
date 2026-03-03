@@ -6,13 +6,19 @@
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <LangVersion>9</LangVersion>
         <RootNamespace>Socialog</RootNamespace>
+        <Configurations>Debug;Release Integer Time;Release Floating-point Time</Configurations>
+        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <DefineConstants>$(DefineConstants)TRACE;PROFILER</DefineConstants>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Integer Time|AnyCPU'">
+        <DefineConstants>$(DefineConstants)TRACE;PROFILER</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Floating-point Time|AnyCPU'">
         <DefineConstants>$(DefineConstants)TRACE;PROFILER</DefineConstants>
     </PropertyGroup>
 
@@ -20,17 +26,6 @@
       <Reference Include="TED">
         <HintPath>TED.dll</HintPath>
       </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Reference Include="SimulogTime">
-            <HintPath>SimulogTime.dll</HintPath>
-        </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="Time\Clock.cs" />
-      <Compile Remove="Time\TimePoint.cs" />
     </ItemGroup>
 
 </Project>

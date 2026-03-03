@@ -1,0 +1,17 @@
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/obj/Release Integer Time/netstandard2.1/Simulog.csproj.AssemblyReference.cache
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/obj/Release Integer Time/netstandard2.1/Simulog.GeneratedMSBuildEditorConfig.editorconfig
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/obj/Release Integer Time/netstandard2.1/Simulog.AssemblyInfoInputs.cache
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/obj/Release Integer Time/netstandard2.1/Simulog.AssemblyInfo.cs
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/obj/Release Integer Time/netstandard2.1/Simulog.csproj.CoreCompileInputs.cache
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/obj/Release Integer Time/netstandard2.1/Simulog.sourcelink.json
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/bin/Release Integer Time/netstandard2.1/Simulog.deps.json
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/bin/Release Integer Time/netstandard2.1/Simulog.dll
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/bin/Release Integer Time/netstandard2.1/Simulog.pdb
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/bin/Release Integer Time/netstandard2.1/Simulog.xml
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/bin/Release Integer Time/netstandard2.1/TED.dll
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/bin/Release Integer Time/netstandard2.1/TED.pdb
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/bin/Release Integer Time/netstandard2.1/TED.xml
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/obj/Release Integer Time/netstandard2.1/Simulog.csproj.Up2Date
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/obj/Release Integer Time/netstandard2.1/Simulog.dll
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/obj/Release Integer Time/netstandard2.1/Simulog.xml
+/Users/samhill/Sync/Northwestern/Research/Ian_Simulator/Simulog/obj/Release Integer Time/netstandard2.1/Simulog.pdb
