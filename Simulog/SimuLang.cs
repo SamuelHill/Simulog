@@ -6,35 +6,75 @@ using Time;
 namespace Simulog {
     using static Variables;
     
+    /// <summary>
+    /// Simulog language definitions - macros that can be used as a DSL within C#. For easy access 
+    /// to all of the various predicates that Simulog offers simply use this file when importing.
+    /// </summary>
     public static class SimuLang {
-        // Only two types of effects - nothing for initially, no deletions (yet)
+        // Only two types of effects - no need for initially, no deletions (yet?)
+        /// <inheritdoc cref="Simulog.Effect.Set{TKey,TCol}"/>
         public static Effect Set<TKey, TCol>(TablePredicate table, Var<TKey> key, 
             Var<TCol> column, Term<TCol> newValue) => Effect.Set(table, key, column, newValue);
+        /// <inheritdoc cref="Simulog.Effect.Add"/>
         public static Effect Add(TableGoal tableGoal) => Effect.Add(tableGoal);
 
         #region Event constructors
+        
+        /// <inheritdoc cref="Simulog.Event{T1}(string,IColumnSpec{T1})"/>
+        /// <inheritdoc cref="Simulog.Event{T1}" path="typeparam"/>
+        /// <returns>The newly created 1-argument Event (table predicate).</returns>
         public static Event<T1> Event<T1>(string name, IColumnSpec<T1> arg) => new(name, arg);
+        
+        /// <inheritdoc cref="Simulog.Event{T1,T2}(string,IColumnSpec{T1},IColumnSpec{T2})"/>
+        /// <inheritdoc cref="Simulog.Event{T1,T2}" path="typeparam"/>
+        /// <returns>The newly created 2-argument Event (table predicate).</returns>
         public static Event<T1, T2> Event<T1, T2>(string name, 
             IColumnSpec<T1> arg1, IColumnSpec<T2> arg2) => new(name, arg1, arg2);
+        
+        /// <inheritdoc cref="Simulog.Event{T1,T2,T3}(string,IColumnSpec{T1},IColumnSpec{T2},IColumnSpec{T3})"/>
+        /// <inheritdoc cref="Simulog.Event{T1,T2,T3}" path="typeparam"/>
+        /// <returns>The newly created 3-argument Event (table predicate).</returns>
         public static Event<T1, T2, T3> Event<T1, T2, T3>(string name, 
             IColumnSpec<T1> arg1, IColumnSpec<T2> arg2, IColumnSpec<T3> arg3) => new(name, arg1, arg2, arg3);
+        
+        /// <inheritdoc cref="Simulog.Event{T1,T2,T3,T4}(string,IColumnSpec{T1},IColumnSpec{T2},IColumnSpec{T3},IColumnSpec{T4})"/>
+        /// <inheritdoc cref="Simulog.Event{T1,T2,T3,T4}" path="typeparam"/>
+        /// <returns>The newly created 4-argument Event (table predicate).</returns>
         public static Event<T1, T2, T3, T4> Event<T1, T2, T3, T4>(string name, 
             IColumnSpec<T1> arg1, IColumnSpec<T2> arg2, IColumnSpec<T3> arg3,
             IColumnSpec<T4> arg4) => new(name, arg1, arg2, arg3, arg4);
+        
+        /// <inheritdoc cref="Simulog.Event{T1,T2,T3,T4,T5}(string,IColumnSpec{T1},IColumnSpec{T2},IColumnSpec{T3},IColumnSpec{T4},IColumnSpec{T5})"/>
+        /// <inheritdoc cref="Simulog.Event{T1,T2,T3,T4,T5}" path="typeparam"/>
+        /// <returns>The newly created 5-argument Event (table predicate).</returns>
         public static Event<T1, T2, T3, T4, T5> Event<T1, T2, T3, T4, T5>(string name, 
             IColumnSpec<T1> arg1, IColumnSpec<T2> arg2, IColumnSpec<T3> arg3, IColumnSpec<T4> arg4,
             IColumnSpec<T5> arg5) => new(name, arg1, arg2, arg3, arg4, arg5);
+        
+        /// <inheritdoc cref="Simulog.Event{T1,T2,T3,T4,T5,T6}(string,IColumnSpec{T1},IColumnSpec{T2},IColumnSpec{T3},IColumnSpec{T4},IColumnSpec{T5},IColumnSpec{T6})"/>
+        /// <inheritdoc cref="Simulog.Event{T1,T2,T3,T4,T5,T6}" path="typeparam"/>
+        /// <returns>The newly created 6-argument Event (table predicate).</returns>
         public static Event<T1, T2, T3, T4, T5, T6> Event<T1, T2, T3, T4, T5, T6>(string name,
             IColumnSpec<T1> arg1, IColumnSpec<T2> arg2, IColumnSpec<T3> arg3,
             IColumnSpec<T4> arg4, IColumnSpec<T5> arg5, IColumnSpec<T6> arg6)
             => new(name, arg1, arg2, arg3, arg4, arg5, arg6);
+        
+        /// <inheritdoc cref="Simulog.Event{T1,T2,T3,T4,T5,T6,T7}(string,IColumnSpec{T1},IColumnSpec{T2},IColumnSpec{T3},IColumnSpec{T4},IColumnSpec{T5},IColumnSpec{T6},IColumnSpec{T7})"/>
+        /// <inheritdoc cref="Simulog.Event{T1,T2,T3,T4,T5,T6,T7}" path="typeparam"/>
+        /// <returns>The newly created 7-argument Event (table predicate).</returns>
         public static Event<T1, T2, T3, T4, T5, T6, T7> Event<T1, T2, T3, T4, T5, T6, T7>(string name,
             IColumnSpec<T1> arg1, IColumnSpec<T2> arg2, IColumnSpec<T3> arg3, IColumnSpec<T4> arg4,
             IColumnSpec<T5> arg5, IColumnSpec<T6> arg6, IColumnSpec<T7> arg7)
             => new(name, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+        
         #endregion
+        
+        // Pseudo-events:
+        public static Scheduled<T> Schedule<T>(string name, Var<T> thingToSchedule) => new(name, thingToSchedule);
+        public static Timer<T> Timer<T>(string name, Var<T> thingToTime) => new(name, thingToTime);
 
         #region Exists constructors
+        
         // can't pass start Variable in as default argument (not compile time constant)...
         public static Existent<T> Exists<T>(string name, Var<T> arg) => new(name, arg, start);
         public static Existent<T> Exists<T>(string name, Var<T> arg, Var<TimePoint> startArg) => new(name, arg, startArg);
@@ -91,14 +131,22 @@ namespace Simulog {
             IColumnSpec<T1> feature1, IColumnSpec<T2> feature2, IColumnSpec<T3> feature3, IColumnSpec<T4> feature4, 
             IColumnSpec<T5> feature5, IColumnSpec<T6> feature6, IColumnSpec<T7> feature7, Var<TimePoint> startArg) => 
             new(name, arg, startArg, feature1, feature2, feature3, feature4, feature5, feature6, feature7);
+        
         #endregion
 
         public static Affinity<T1, T2> Affinity<T1, T2>(string name, Var<(T1, T2)> pair, Var<T1> main, Var<T2> other, Var<int> value)
             where T1 : IComparable<T1>, IEquatable<T1> where T2 : IComparable<T2>, IEquatable<T2> => new(name, pair, main, other, value);
         public static FloatAffinity<T1, T2> Affinity<T1, T2>(string name, Var<(T1, T2)> pair, Var<T1> main, Var<T2> other, Var<float> value) 
             where T1 : IComparable<T1>, IEquatable<T1> where T2 : IComparable<T2>, IEquatable<T2> => new(name, pair, main, other, value);
+        public static GenericAffinity<T1, T2, T3> Affinity<T1, T2, T3>(string name, Var<(T1, T2)> pair, Var<T1> main, Var<T2> other, Var<T3> value) 
+            where T1 : IComparable<T1>, IEquatable<T1> where T2 : IComparable<T2>, IEquatable<T2>  where T3 : IComparable<T3>, IEquatable<T3> =>
+            new(name, pair, main, other, value);
 
         public static Relationship<T1, T2> Relationship<T1, T2>(string name, Var<T1> main, Var<T2> other, Var<bool> state) 
+            where T1 : IComparable<T1>, IEquatable<T1> where T2 : IComparable<T2>, IEquatable<T2> => new(name, main, other, state);
+        public static ManyToOneRelationship<T1, T2> ManyToOne<T1, T2>(string name, Var<T1> main, Var<T2> other, Var<bool> state) 
+            where T1 : IComparable<T1>, IEquatable<T1> where T2 : IComparable<T2>, IEquatable<T2> => new(name, main, other, state);
+        public static OneToOneRelationship<T1, T2> OneToOne<T1, T2>(string name, Var<T1> main, Var<T2> other, Var<bool> state) 
             where T1 : IComparable<T1>, IEquatable<T1> where T2 : IComparable<T2>, IEquatable<T2> => new(name, main, other, state);
         public static SymmetricRelationship<T> Relationship<T>(string name, Var<SymmetricTuple<T>> pair, 
             Var<T> main, Var<T> other, Var<bool> state) where T : IComparable<T>, IEquatable<T> => new(name, pair, main, other, state);

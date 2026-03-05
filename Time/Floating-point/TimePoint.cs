@@ -19,6 +19,11 @@ namespace Time {
             typeof(TimePoint), (o, _) => ((TimePoint)o == Eschaton ? 
                                               "Time.TimePoint.Eschaton" : 
                                               $"new Time.TimePoint({((TimePoint)o).Clock})",
+                                          // Second element of tuple is expected to be a string naming this expression
+                                          // generator for caching, but null is also excepted in which case no caching
+                                          // is done. Caching is only needed for linking outside data (tables) or
+                                          // retaining state (RNG), neither of which is needed here.
+                                          // ReSharper disable once NullableWarningSuppressionIsUsed
                                           null)!);
 
         /// <param name="clock">Tick value</param>
